@@ -151,6 +151,11 @@ public class MainActivity extends AppCompatActivity {
             mWxApi = WXAPIFactory.createWXAPI(this, AppContact.THIRD_LOGIN_WX_ID); //初始化wx api
         }
 
+        if (!mWxApi.isWXAppInstalled()){
+            ToastUtils.getInstance().showInfo(mCoordinatorLayout, "您还没有安装微信");
+            return;
+        }
+
         WXTextObject textObj = new WXTextObject();  //初始化一个WXTextObject对象
         textObj.text = "测试测试测试测试测试";
 
