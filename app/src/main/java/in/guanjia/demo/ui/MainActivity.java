@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.JsResult;
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout mCoordinatorLayout;
     @Bind(R.id.scroll_view)
     OverScrollView mScrollView;
-
 
     private WebSettings mWebSettings;
     private WebAppInterface mWebAppInterface;
@@ -136,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.context_menu:
+                Snackbar.make(mCoordinatorLayout, "Menu select", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -177,6 +181,13 @@ public class MainActivity extends AppCompatActivity {
         else
             ToastUtils.getInstance().showInfo(mCoordinatorLayout, R.string.exit);
         mBackPressedTime = System.currentTimeMillis();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
 }

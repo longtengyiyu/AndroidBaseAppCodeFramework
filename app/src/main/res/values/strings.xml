@@ -22,4 +22,5 @@
     <string name="exit">再按一次退出程序</string>
     <string name="loading">正在加载......</string>
     <string name="activity_floatTop">FloatTop</string>
+    <string name="context_menu">menu</string>
 </resources>
