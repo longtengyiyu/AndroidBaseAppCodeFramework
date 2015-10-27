@@ -1,2 +1,2 @@
 # AndroidBaseAppCodeFramework
-a base code Framework for android 
+a base Framework for android code
