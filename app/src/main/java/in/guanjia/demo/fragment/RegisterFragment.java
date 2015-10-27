@@ -82,6 +82,8 @@ public class RegisterFragment extends BaseAbsFragment {
         LogUtils.d(TAG, "EditableText" + mUserNameContext);
         LogUtils.d(TAG, "Text" + mEtUsername.getText());
         if (StringUtils.isEmpty(mUserNameContext)) {
+            mEtUsername.requestFocus();
+            mEtUsername.setFocusable(true);
             ToastUtils.getInstance().showInfo(mTvGetValidCode, R.string.username_empty);
             return false;
         }
@@ -90,6 +92,8 @@ public class RegisterFragment extends BaseAbsFragment {
         LogUtils.d(TAG, "EditableText" + mValidCodeContext);
         LogUtils.d(TAG, "Text" + mEtValidCode.getText());
         if (StringUtils.isEmpty(mValidCodeContext)) {
+            mEtValidCode.requestFocus();
+            mEtValidCode.setFocusable(true);
             ToastUtils.getInstance().showInfo(mTvGetValidCode, R.string.password_empty);
             return false;
         }

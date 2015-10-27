@@ -69,6 +69,8 @@ public class SetPasswordFragment extends BaseAbsFragment {
         LogUtils.d(TAG, "EditableText" + mPasswordContent);
         LogUtils.d(TAG, "Text" + mEtSetPassword.getText());
         if (StringUtils.isEmpty(mPasswordContent)) {
+            mEtSetPassword.requestFocus();
+            mEtSetPassword.setFocusable(true);
             ToastUtils.getInstance().showInfo(mTvNext, R.string.password_empty);
             return false;
         }
@@ -77,6 +79,8 @@ public class SetPasswordFragment extends BaseAbsFragment {
         LogUtils.d(TAG, "EditableText" + mConfirmPasswordContent);
         LogUtils.d(TAG, "Text" + mEtConfirmPassword.getText());
         if (StringUtils.isEmpty(mConfirmPasswordContent)) {
+            mEtConfirmPassword.requestFocus();
+            mEtConfirmPassword.setFocusable(true);
             ToastUtils.getInstance().showInfo(mTvNext, R.string.confirm_password_empty);
             return false;
         }
