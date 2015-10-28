@@ -21,13 +21,12 @@ public class AppClientConfig {
     public static final String WX_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token";
     public static final String APP_BASE_URL = "";
 
-    private static ApiInterface mApiInterface;
+    private static ApiInterface mApiInterface = null;
 
     public static ApiInterface getApiClient() {
         if (mApiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(APP_BASE_URL)
-
                     .build();
             mApiInterface = retrofit.create(ApiInterface.class);
         }

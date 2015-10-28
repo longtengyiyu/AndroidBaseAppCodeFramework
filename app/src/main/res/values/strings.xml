@@ -23,4 +23,7 @@
     <string name="loading">正在加载......</string>
     <string name="activity_floatTop">FloatTop</string>
     <string name="context_menu">menu</string>
+    <string name="share_wei_xin">微信</string>
+    <string name="share_wei_bo">微博</string>
+    <string name="share_message">短信</string>
 </resources>

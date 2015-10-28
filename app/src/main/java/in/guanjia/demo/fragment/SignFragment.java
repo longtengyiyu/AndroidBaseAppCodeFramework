@@ -148,6 +148,11 @@ public class SignFragment extends BaseAbsFragment {
             mRequestParams = new RequestParams();
         }
 
+        mRequestParams.put(AppContact.WX_ID, AppContact.THIRD_LOGIN_WX_ID);
+        mRequestParams.put(AppContact.WX_SECRET, AppContact.WX_SECRET_VALUE);
+        mRequestParams.put(AppContact.WX_CODE, code);
+        mRequestParams.put(AppContact.WX_GRANT_TYPE, AppContact.WX_GRANT_TYPE_VALUE);
+
         BaseRequest.get(AppClientConfig.WX_ACCESS_TOKEN_URL, mRequestParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

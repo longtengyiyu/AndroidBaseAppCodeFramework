@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.context_menu:
+            case R.id.menu_main:
                 Snackbar.make(mCoordinatorLayout, "Menu select", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             default:
