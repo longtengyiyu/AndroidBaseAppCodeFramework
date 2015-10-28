@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpWebView() {
 
         mWebSettings = mWebView.getSettings(); //获取web settings
-        mWebSettings.setSupportZoom(false);    //不支持缩放
+        mWebSettings.setSupportZoom(false);    //不支持缩�?
         mWebSettings.setLoadWithOverviewMode(true);
         mWebSettings.setUseWideViewPort(true);
         mWebSettings.setDefaultTextEncodingName("UTF-8"); //网页文字编码
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         mWebSettings.setJavaScriptEnabled(true);
         CustomWebViewClient webViewClient = new CustomWebViewClient();
         mWebView.setWebViewClient(webViewClient);
-        mWebAppInterface = new WebAppInterface();
+        mWebAppInterface = new WebAppInterface(MainActivity.this);
         mWebView.addJavascriptInterface(mWebAppInterface, "AndroidWebAppInterface");
         mWebView.loadUrl("http://guanjia.in/");
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //==============================================发送消息（微信分享） Start===========================================================
+    //==============================================发送消息（微信分享�?Start===========================================================
     private void onShare2WeChat() {
         if (mWxApi == null) {
             mWxApi = WXAPIFactory.createWXAPI(this, AppContact.THIRD_LOGIN_WX_ID); //初始化wx api
@@ -162,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
         WXMediaMessage msg = new WXMediaMessage(); //用WXTextObject对象初始化一个WXMediaMessage对象
         msg.mediaObject = textObj;
         // msg.title = "Will be ignored";
-        msg.description = "这个是测试测试测试测试";  //发送文本类型的消息时，title字段不起作用
+        msg.description = "这个是测试测试测试测�?;  //发送文本类型的消息时，title字段不起作用
 
         // 构造一个Req
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = buildTransaction("text");  //transaction字段用于唯一标识一个请求
+        req.transaction = buildTransaction("text");  //transaction字段用于唯一标识一个请�?
         req.message = msg;
         req.scene = SendMessageToWX.Req.WXSceneSession;  //分享到朋友圈；SendMessageToWX.Req.WXSceneSession 不分享朋友圈
 
