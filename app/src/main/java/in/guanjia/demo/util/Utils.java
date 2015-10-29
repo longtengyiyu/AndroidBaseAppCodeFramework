@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import in.guanjia.demo.app.CustomApplication;
@@ -125,6 +127,14 @@ public class Utils {
             convertToTranslucent.invoke(activity, null, options);
         } catch (Throwable t) {
             t.printStackTrace();
+        }
+    }
+
+    public void closeQuietly(Closeable closeable) {
+        if (closeable == null) return;
+        try {
+            closeable.close();
+        } catch (IOException ignored) {
         }
     }
 

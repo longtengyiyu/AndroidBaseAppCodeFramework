@@ -1,9 +1,7 @@
 package in.guanjia.demo.view;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
@@ -24,7 +22,7 @@ import in.guanjia.demo.util.StringUtils;
 import in.guanjia.demo.util.ToastUtils;
 
 /**
- * Description:
+ * Description:分享Dialog
  * Author:    Oscar
  * Version    V1.0
  * Date:      2015/10/28
@@ -76,8 +74,7 @@ public class ShareDialog implements View.OnClickListener {
         }
         share2Friends(mParam);
         mDialog.dismiss();
-        mDialog = null;  //Ƶ����������dialog����Ҫ�¿գ��������Ƶ�ʺ�С�����¿մ���
-
+        mDialog = null;  //频繁分享，此dialog不需要致空，如果分享频率很小建议致空处理
     }
 
     protected void share2Friends(ShareParam shareParam){
@@ -101,7 +98,7 @@ public class ShareDialog implements View.OnClickListener {
         }
 
         if (!mWxApi.isWXAppInstalled()){
-            ToastUtils.getInstance().showInfo(((Activity)shareParam.getContext()).findViewById(R.id.root_view), "您还没有安装微信");  //声明activity的parent view的id必须root_view，否则此处必须修�?
+            ToastUtils.getInstance().showInfo(((Activity)shareParam.getContext()).findViewById(R.id.root_view), "您还没有安装微信");  //声明activity的parent view的id必须root_view，否则此处必须修改
             return;
         }
 
@@ -112,11 +109,11 @@ public class ShareDialog implements View.OnClickListener {
         WXMediaMessage msg = new WXMediaMessage(); //用WXTextObject对象初始化一个WXMediaMessage对象
         msg.mediaObject = textObj;
         // msg.title = "Will be ignored";
-        msg.description = "这个是测试测试测试测�?;  //发送文本类型的消息时，title字段不起作用
+        msg.description = "这个是测试测试测试测试";  //发送文本类型的消息时，title字段不起作用
 
         // 构造一个Req
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = buildTransaction("text");  //transaction字段用于唯一标识一个请�?
+        req.transaction = buildTransaction("text");  //transaction字段用于唯一标识一个请求
         req.message = msg;
         req.scene = SendMessageToWX.Req.WXSceneSession;  //分享到朋友圈；SendMessageToWX.Req.WXSceneSession 不分享朋友圈
 
@@ -129,7 +126,7 @@ public class ShareDialog implements View.OnClickListener {
     }
 
     private void share2Message(ShareParam shareParam){
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + ""));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(AppContact.SEND_MESSAGE_TO + ""));
         intent.putExtra(AppContact.SEND_MESSAGE_PARAM, shareParam.getContent());
         shareParam.getContext().startActivity(intent);
     }
@@ -179,12 +176,10 @@ public class ShareDialog implements View.OnClickListener {
         }
         public ShareDialog create(){
             if (mShareDialog == null){
-                mShareDialog = new ShareDialog(param);  //实例化对�?
+                mShareDialog = new ShareDialog(param);  //实例化对象
             }
             mShareDialog.showDialog();
             return mShareDialog;
         }
-
-
     }
 }

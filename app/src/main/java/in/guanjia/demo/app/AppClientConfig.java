@@ -1,8 +1,11 @@
 package in.guanjia.demo.app;
 
-import java.util.concurrent.Executor;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import in.guanjia.demo.listener.ApiInterface;
+import in.guanjia.demo.util.GsonConverterFactory;
 import retrofit.Retrofit;
 
 /**
@@ -19,14 +22,21 @@ import retrofit.Retrofit;
 public class AppClientConfig {
 
     public static final String WX_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token";
-    public static final String APP_BASE_URL = "";
+//    public static final String APP_BASE_URL = "";
+    public static final String APP_BASE_URL = "http://int.dpool.sina.com.cn";  //?format=json&ip=218.4.255.25
+
 
     private static ApiInterface mApiInterface = null;
 
     public static ApiInterface getApiClient() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+
         if (mApiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(APP_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
             mApiInterface = retrofit.create(ApiInterface.class);
         }

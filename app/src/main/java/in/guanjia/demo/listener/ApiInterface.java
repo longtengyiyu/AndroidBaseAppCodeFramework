@@ -2,6 +2,8 @@ package in.guanjia.demo.listener;
 
 import java.util.HashMap;
 
+import in.guanjia.demo.bean.IpAddressInfo;
+import retrofit.Call;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -49,5 +51,13 @@ public interface ApiInterface {
 
     @GET("/USER")
     String upload(@Field("firstName") String first, @Field("lastName") String last);
+
+    @GET("/iplookup/iplookup.php")
+    Call<IpAddressInfo> getIpAddressInfo(@Query("format") String format, @Query("ip") String ip);
+
+
+    //定义完整url，自动忽略baseUrl，扩展性大大提升，赞
+    @POST("http://int.dpool.sina.com.cn/iplookup/iplookup.php")
+    Call<IpAddressInfo> getIpAddressInfo();
 
 }

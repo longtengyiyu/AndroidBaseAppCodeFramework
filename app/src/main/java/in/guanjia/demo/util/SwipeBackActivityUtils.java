@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import in.guanjia.demo.R;
 import in.guanjia.demo.view.SwipeBackLayout;
 
