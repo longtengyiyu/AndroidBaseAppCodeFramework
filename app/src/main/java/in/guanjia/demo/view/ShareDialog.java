@@ -74,7 +74,7 @@ public class ShareDialog implements View.OnClickListener {
         }
         share2Friends(mParam);
         mDialog.dismiss();
-        mDialog = null;  //频繁分享，此dialog不需要致空，如果分享频率很小建议致空处理
+//        mDialog = null;  //频繁分享，此dialog不需要致空，如果分享频率很小建议致空处理
     }
 
     protected void share2Friends(ShareParam shareParam){
@@ -126,7 +126,7 @@ public class ShareDialog implements View.OnClickListener {
     }
 
     private void share2Message(ShareParam shareParam){
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(AppContact.SEND_MESSAGE_TO + ""));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + ""));
         intent.putExtra(AppContact.SEND_MESSAGE_PARAM, shareParam.getContent());
         shareParam.getContext().startActivity(intent);
     }
