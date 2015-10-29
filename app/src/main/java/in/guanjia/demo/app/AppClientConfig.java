@@ -22,7 +22,7 @@ import retrofit.Retrofit;
 public class AppClientConfig {
 
 //    public static final String APP_BASE_URL = "";
-    public static final String APP_BASE_URL = "";
+    public static final String APP_BASE_URL = "http://guanjia.in";
 
 
     private static ApiInterface mApiInterface = null;
