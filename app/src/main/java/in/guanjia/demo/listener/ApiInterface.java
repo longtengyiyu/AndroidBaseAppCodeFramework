@@ -3,6 +3,7 @@ package in.guanjia.demo.listener;
 import java.util.HashMap;
 
 import in.guanjia.demo.bean.IpAddressInfo;
+import in.guanjia.demo.bean.WeChat;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -60,6 +61,17 @@ public interface ApiInterface {
     @POST("http://int.dpool.sina.com.cn/iplookup/iplookup.php")
     Call<IpAddressInfo> getIpAddressInfo();
 
+    @GET("https://api.weixin.qq.com/sns/oauth2/access_token")
+    Call<WeChat> getAccessToken(@Query("appid") String appId,@Query("secret") String secret, @Query("code") String code, @Query("grant_type") String grantType);
 
+    /**
+     * 参数多的话可以写成QueryMap
+     * 刚开始就写的QueryMap
+     * 死活拿不到数据以为是不支持
+     * 原因是自己少写了回调监听
+     * 切记～认真点
+     */
+    @GET("https://api.weixin.qq.com/sns/oauth2/access_token")
+    Call<WeChat> getAccessToken(@QueryMap HashMap<String, String> params);
 
 }

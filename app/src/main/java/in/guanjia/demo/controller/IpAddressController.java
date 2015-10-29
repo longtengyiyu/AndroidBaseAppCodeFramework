@@ -37,7 +37,7 @@ public class IpAddressController extends BaseController<IpAddressInfo> {
 
             @Override
             public void onFailure(Throwable t) {
-                if (mApiCallBack != null){
+                if (mApiCallBack != null && t != null){
                     mApiCallBack.onFail(t.getMessage());
                 }
             }

@@ -3,25 +3,24 @@ package in.guanjia.demo.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+
 import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
+
 import butterknife.Bind;
 import butterknife.OnClick;
-import cz.msebera.android.httpclient.Header;
 import in.guanjia.demo.R;
-import in.guanjia.demo.app.AppClientConfig;
 import in.guanjia.demo.app.AppContact;
 import in.guanjia.demo.base.BaseAbsFragment;
-import in.guanjia.demo.base.BaseRequest;
 import in.guanjia.demo.bean.LoginSuccess;
 import in.guanjia.demo.bean.ThirdPartLogin;
+import in.guanjia.demo.bean.WeChat;
+import in.guanjia.demo.controller.WeChatLoginController;
+import in.guanjia.demo.listener.ApiCallBack;
 import in.guanjia.demo.ui.FloatTopMenuActivity;
 import in.guanjia.demo.ui.LoginActivity;
 import in.guanjia.demo.ui.MainActivity;
@@ -44,11 +43,11 @@ import in.guanjia.demo.util.Utils;
  * 2015/10/20        Oscar           1.0                    1.0
  * Why & What is modified:
  */
-public class SignFragment extends BaseAbsFragment {
+public class SignFragment extends BaseAbsFragment implements ApiCallBack<WeChat> {
     @Bind(R.id.root_view)
     RelativeLayout mRootView;
     private IWXAPI mWxApi;
-    private RequestParams mRequestParams;
+    private WeChatLoginController mWeChatLoginController = null;
 
     public SignFragment() {
 
@@ -144,38 +143,32 @@ public class SignFragment extends BaseAbsFragment {
     }
 
     private void getAccessTokenByCode(String code){
-        if (mRequestParams == null){
-            mRequestParams = new RequestParams();
+        if (mWeChatLoginController == null){
+            mWeChatLoginController = new WeChatLoginController(AppContact.THIRD_LOGIN_WX_ID, AppContact.WX_SECRET_VALUE, code, AppContact.WX_GRANT_TYPE_VALUE);
         }
 
-        mRequestParams.put(AppContact.WX_ID, AppContact.THIRD_LOGIN_WX_ID);
-        mRequestParams.put(AppContact.WX_SECRET, AppContact.WX_SECRET_VALUE);
-        mRequestParams.put(AppContact.WX_CODE, code);
-        mRequestParams.put(AppContact.WX_GRANT_TYPE, AppContact.WX_GRANT_TYPE_VALUE);
-
-        BaseRequest.get(AppClientConfig.WX_ACCESS_TOKEN_URL, mRequestParams, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                //获取openId
-                try {
-                    if(StringUtils.notEmpty(response.getString("openid")) && StringUtils.notEmpty(response.getString("access_token"))){
-                        Utils.getInstance().startNewActivity(MainActivity.class);
-                        getActivity().finish();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-                LogUtils.d(TAG, "statusCode ==" + statusCode + "errorResponse ==" + errorResponse.toString());
-                ToastUtils.getInstance().showInfo(mRootView, "授权失败");
-            }
-        });
+        mWeChatLoginController.setApiCallBack(this);
+        mWeChatLoginController.loadData();
     }
+
+    @Override
+    public void onSuccess(WeChat weChat) {
+        if (StringUtils.notEmpty(weChat.openId) && StringUtils.notEmpty(weChat.accessToken)){
+            Utils.getInstance().startNewActivity(MainActivity.class);
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onFail(String error) {
+        ToastUtils.getInstance().showInfo(mRootView, error);
+    }
+
+    @Override
+    public void onFail() {
+
+    }
+
 
     //=====================================================================end=====================================================================
 
