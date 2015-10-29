@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -68,6 +69,48 @@ public class Utils {
     public void hideSoftKeyboard(Activity context, EditText et){
         InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(et.getWindowToken(), 0);
+    }
+
+    /**
+     * dp 转 px
+     * @param context
+     * @param dp
+     * @return
+     */
+    public int dip2px(Context context, float dp) {
+        final float scale = getScreenDensity(context);
+        return (int) (dp * scale + 0.5);
+    }
+
+    /**
+     * 获取屏幕密度
+     * @param context
+     * @return
+     */
+    public float getScreenDensity(Context context) {
+        return context.getResources().getDisplayMetrics().density;
+    }
+
+    /**
+     * 获取屏幕的宽
+     * @param context
+     * @return
+     */
+    public int getScreenWidth(Activity context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
+    }
+
+    /**
+     * 获取屏幕的高
+     * @param context
+     * @return
+     */
+    public int getScreenHeight(Activity context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.heightPixels;
     }
 
     public static void convertActivityToTranslucent(Activity activity) {
