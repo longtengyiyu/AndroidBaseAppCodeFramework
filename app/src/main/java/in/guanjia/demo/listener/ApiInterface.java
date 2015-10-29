@@ -53,7 +53,7 @@ public interface ApiInterface {
     @GET("/USER")
     String upload(@Field("firstName") String first, @Field("lastName") String last);
 
-    @GET("/iplookup/iplookup.php")
+    @GET("http://int.dpool.sina.com.cn/iplookup/iplookup.php")
     Call<IpAddressInfo> getIpAddressInfo(@Query("format") String format, @Query("ip") String ip);
 
 

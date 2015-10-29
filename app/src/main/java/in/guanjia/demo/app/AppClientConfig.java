@@ -21,9 +21,8 @@ import retrofit.Retrofit;
  */
 public class AppClientConfig {
 
-    public static final String WX_ACCESS_TOKEN_URL = "";
 //    public static final String APP_BASE_URL = "";
-    public static final String APP_BASE_URL = "http://int.dpool.sina.com.cn";  //?format=json&ip=218.4.255.25
+    public static final String APP_BASE_URL = "";
 
 
     private static ApiInterface mApiInterface = null;

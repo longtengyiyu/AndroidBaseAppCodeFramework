@@ -22,7 +22,7 @@ public class NetInfoUtils {
     /**
      * 判断网络连接是否可用  * @param context  * @return
      */
-    private static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         if (context != null) {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (cm != null) {         //如果仅仅是用来判断网络连接         //则可以使用

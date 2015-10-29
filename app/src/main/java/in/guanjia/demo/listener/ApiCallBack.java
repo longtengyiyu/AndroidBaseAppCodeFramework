@@ -14,5 +14,4 @@ package in.guanjia.demo.listener;
 public interface ApiCallBack<T> {
     void onSuccess(T t);
     void onFail(String error);
-    void onFail();
 }

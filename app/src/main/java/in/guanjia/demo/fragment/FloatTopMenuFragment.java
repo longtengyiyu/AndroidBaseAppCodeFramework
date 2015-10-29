@@ -120,11 +120,6 @@ public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollLis
     }
 
     @Override
-    public void onFail() {
-
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (mIpAddressController != null && mIpAddressController.getRequestCall() != null){

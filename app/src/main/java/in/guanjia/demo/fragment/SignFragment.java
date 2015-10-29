@@ -164,12 +164,6 @@ public class SignFragment extends BaseAbsFragment implements ApiCallBack<WeChat>
         ToastUtils.getInstance().showInfo(mRootView, error);
     }
 
-    @Override
-    public void onFail() {
-
-    }
-
-
     //=====================================================================end=====================================================================
 
     @Override
