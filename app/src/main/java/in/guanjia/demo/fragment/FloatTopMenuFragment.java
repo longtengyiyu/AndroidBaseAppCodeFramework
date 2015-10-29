@@ -97,7 +97,7 @@ public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollLis
         ApiInterface service = AppClientConfig.getApiClient();
         mRequestCall = service.getIpAddressInfo("json", "101.81.97.188");
 
-        //异步请求
+        //异步请求,在主线程回调响应结果response
         mRequestCall.enqueue(new Callback<IpAddressInfo>() {
             @Override
             public void onResponse(Response<IpAddressInfo> response, Retrofit retrofit) {
@@ -115,24 +115,23 @@ public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollLis
 
     private void setIpAddressInfo(IpAddressInfo info){
 
-        String addressInfo = "";
-
+        StringBuffer sb = new StringBuffer("");
         if (StringUtils.notEmpty(info.country)){
-            addressInfo += info.country;
+            sb.append(info.country);
         }
 
         if (StringUtils.notEmpty(info.province)){
-            addressInfo += info.province;
+            sb.append(info.province);
         }
         if (StringUtils.notEmpty(info.city)){
-            addressInfo += info.city;
+            sb.append(info.city);
         }
-        mTvAddress.setText(addressInfo);
+        mTvAddress.setText(sb);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mRequestCall.cancel();
+        mRequestCall.cancel(); //新增加cancel函数，更加灵活，之前取消使用setListener(null),
     }
 }
