@@ -1,30 +1,20 @@
 package in.guanjia.demo.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import in.guanjia.demo.R;
-import in.guanjia.demo.app.AppClientConfig;
 import in.guanjia.demo.base.BaseAbsFragment;
 import in.guanjia.demo.bean.IpAddressInfo;
-import in.guanjia.demo.listener.ApiInterface;
+import in.guanjia.demo.controller.IpAddressController;
+import in.guanjia.demo.listener.ApiCallBack;
 import in.guanjia.demo.listener.OnScrollListener;
-import in.guanjia.demo.util.LogUtils;
 import in.guanjia.demo.util.StringUtils;
+import in.guanjia.demo.util.ToastUtils;
 import in.guanjia.demo.view.FloatTopMenuScrollView;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 /**
  * Description:
@@ -37,7 +27,7 @@ import retrofit.Retrofit;
  * 2015/10/27        Oscar           1.0                    1.0
  * Why & What is modified:
  */
-public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollListener {
+public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollListener, ApiCallBack<IpAddressInfo> {
 
     @Bind(R.id.tv_float)
     TextView mTvFloat;
@@ -49,7 +39,7 @@ public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollLis
     LinearLayout mRootView;
     @Bind(R.id.tv_address)
     TextView mTvAddress;
-    private Call<IpAddressInfo> mRequestCall = null;
+    private IpAddressController mIpAddressController = null;
 
     public FloatTopMenuFragment() {
 
@@ -94,23 +84,11 @@ public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollLis
     }
 
     private void setUpComponent(){
-        ApiInterface service = AppClientConfig.getApiClient();
-        mRequestCall = service.getIpAddressInfo("json", "101.81.97.188");
-
-        //异步请求,在主线程回调响应结果response
-        mRequestCall.enqueue(new Callback<IpAddressInfo>() {
-            @Override
-            public void onResponse(Response<IpAddressInfo> response, Retrofit retrofit) {
-                if (response != null && response.isSuccess() && response.body() != null) {
-                    setIpAddressInfo(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-        });
+        if (mIpAddressController == null){
+            mIpAddressController = new IpAddressController("json", "101.81.97.188");
+        }
+        mIpAddressController.setApiCallBack(this);
+        mIpAddressController.loadData();
     }
 
     private void setIpAddressInfo(IpAddressInfo info){
@@ -130,8 +108,27 @@ public class FloatTopMenuFragment extends BaseAbsFragment implements OnScrollLis
     }
 
     @Override
+    public void onSuccess(IpAddressInfo ipAddressInfo) {
+        if (ipAddressInfo != null) {
+            setIpAddressInfo(ipAddressInfo);
+        }
+    }
+
+    @Override
+    public void onFail(String error) {
+        ToastUtils.getInstance().showInfo(mRootView, error);
+    }
+
+    @Override
+    public void onFail() {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mRequestCall.cancel(); //新增加cancel函数，更加灵活，之前取消使用setListener(null),
+        if (mIpAddressController != null && mIpAddressController.getRequestCall() != null){
+            mIpAddressController.getRequestCall().cancel(); //新增加cancel函数，更加灵活，之前取消使用setListener(null),
+        }
     }
 }

@@ -1,5 +1,7 @@
 package in.guanjia.demo.controller;
 
+import in.guanjia.demo.base.BaseController;
+
 /**
  * Description:微信登录控制器
  * Author:    Oscar
@@ -11,10 +13,15 @@ package in.guanjia.demo.controller;
  * 2015/10/21        Oscar           1.0                    1.0
  * Why & What is modified:
  */
-public class WechatLoginController {
-    public WechatLoginController(){
+public class WeChatLoginController extends BaseController{
 
+    public WeChatLoginController(){
+//        mRequestCall = CustomApplication.getRequestService().
     }
 
 
+    @Override
+    public void loadData() {
+
+    }
 }
