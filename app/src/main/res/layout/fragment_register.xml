@@ -11,6 +11,7 @@
         <EditText
             android:id="@+id/et_username"
             android:hint="@string/hint_username"
+            android:inputType="number"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             style="@style/WrapStyle" />
@@ -26,6 +27,7 @@
         <EditText
             android:id="@+id/et_valid_code"
             android:hint="@string/hint_valid_code"
+            android:inputType="number"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             style="@style/WrapStyle"/>

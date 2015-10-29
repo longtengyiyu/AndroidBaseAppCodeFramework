@@ -10,6 +10,7 @@
 
         <EditText
             android:id="@+id/et_username"
+            android:inputType="number"
             android:hint="@string/hint_username"
             style="@style/WrapStyle" />
     </android.support.design.widget.TextInputLayout>
