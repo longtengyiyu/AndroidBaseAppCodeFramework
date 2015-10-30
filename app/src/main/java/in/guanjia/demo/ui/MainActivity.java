@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     //==============================================发送消息（微信分享） Start===========================================================
     private void onShare2WeChat() {
         if (mWxApi == null) {
-            mWxApi = WXAPIFactory.createWXAPI(this, AppContact.THIRD_LOGIN_WX_ID); //初始化wx api
+            mWxApi = WXAPIFactory.createWXAPI(this, AppContact.WX_APP_ID); //初始化wx api
         }
 
         if (!mWxApi.isWXAppInstalled()){

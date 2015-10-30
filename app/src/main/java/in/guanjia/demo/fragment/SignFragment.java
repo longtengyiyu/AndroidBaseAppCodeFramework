@@ -68,11 +68,12 @@ public class SignFragment extends BaseAbsFragment implements ApiCallBack<WeChat>
         return R.layout.fragment_sign;
     }
 
-    @OnClick({R.id.tv_register, R.id.tv_login, R.id.tv_qq, R.id.tv_weibo, R.id.tv_wechat})
+    @OnClick({R.id.tv_register, R.id.tv_login, R.id.tv_qq, R.id.tv_weibo, R.id.tv_wechat, R.id.layout_register})
     void onClick(View view) {
         if (NetInfoUtils.isWifiEnabled(getActivity())) {
             switch (view.getId()) {
                 case R.id.tv_register:
+                case R.id.layout_register:
 
                     Utils.getInstance().startNewActivity(RegisterActivity.class);
                     break;
@@ -115,9 +116,9 @@ public class SignFragment extends BaseAbsFragment implements ApiCallBack<WeChat>
      */
     private void regAppId2Wx() {
         /**实例化WXAPI*/
-        mWxApi = WXAPIFactory.createWXAPI(getActivity(), AppContact.THIRD_LOGIN_WX_ID);
+        mWxApi = WXAPIFactory.createWXAPI(getActivity(), AppContact.WX_APP_ID);
         /**将应用注册到微信*/
-        mWxApi.registerApp(AppContact.THIRD_LOGIN_WX_ID);
+        mWxApi.registerApp(AppContact.WX_APP_ID);
     }
 
     /**
@@ -144,7 +145,7 @@ public class SignFragment extends BaseAbsFragment implements ApiCallBack<WeChat>
 
     private void getAccessTokenByCode(String code){
         if (mWeChatLoginController == null){
-            mWeChatLoginController = new WeChatLoginController(AppContact.THIRD_LOGIN_WX_ID, AppContact.WX_SECRET_VALUE, code, AppContact.WX_GRANT_TYPE_VALUE);
+            mWeChatLoginController = new WeChatLoginController(AppContact.WX_APP_ID, AppContact.WX_SECRET_VALUE, code, AppContact.WX_GRANT_TYPE_VALUE);
         }
 
         mWeChatLoginController.setApiCallBack(this);

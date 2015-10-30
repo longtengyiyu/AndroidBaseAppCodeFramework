@@ -9,6 +9,8 @@
     <color name="sign_bg">#3F51B5</color>
     <color name="input_text_color">#333333</color>
     <color name="small_btn_bg_normal_color">#303F9F</color>
+    <color name="ripple_bg">#DFDFDF</color>
+
     <drawable name="small_btn_bg_normal_drawable">#303F9F</drawable>
     <drawable name="small_btn_bg_focus_drawable">#7C4DFF</drawable>
 

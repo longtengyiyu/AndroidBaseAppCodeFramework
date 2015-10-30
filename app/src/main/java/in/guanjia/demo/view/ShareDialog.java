@@ -94,7 +94,7 @@ public class ShareDialog implements View.OnClickListener {
     private void share2WeChat(ShareParam shareParam){
 
         if (mWxApi == null) {
-            mWxApi = WXAPIFactory.createWXAPI(shareParam.getContext(), AppContact.THIRD_LOGIN_WX_ID); //初始化wx api
+            mWxApi = WXAPIFactory.createWXAPI(shareParam.getContext(), AppContact.WX_APP_ID); //初始化wx api
         }
 
         if (!mWxApi.isWXAppInstalled()){

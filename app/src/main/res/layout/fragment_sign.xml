@@ -8,35 +8,45 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_sign_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_sign_logo" />
 
-    <TextView
-        android:id="@+id/tv_register"
+
+    <LinearLayout
+        android:id="@+id/layout_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
         android:layout_above="@+id/tv_login"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/login_btn_shape"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/register"/>
+        android:textSize="18sp">
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:colorControlHighlight="@color/ripple_bg"
+            android:padding="8dp"
+            android:gravity="center"
+            android:text="@string/register"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:padding="8dp"
-        android:textColor="@color/white"
         android:layout_above="@+id/tv_qq"
-        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
-        android:text="@string/login"/>
+        android:layout_marginTop="12dp"
+        android:padding="8dp"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/tv_wechat"
@@ -44,10 +54,10 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
-        android:src="@mipmap/ic_wechat"
         android:layout_toLeftOf="@+id/tv_qq"
         android:layout_toStartOf="@+id/tv_qq"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_wechat" />
 
     <ImageView
         android:id="@+id/tv_qq"
@@ -56,10 +66,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:src="@mipmap/ic_qq"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_qq" />
 
     <ImageView
         android:id="@+id/tv_weibo"
@@ -67,8 +77,8 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
-        android:src="@mipmap/ic_weibo"
-        android:layout_toRightOf="@+id/tv_qq"
         android:layout_toEndOf="@+id/tv_qq"
-        android:contentDescription="@string/app_name" />
+        android:layout_toRightOf="@+id/tv_qq"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_weibo" />
 </RelativeLayout>

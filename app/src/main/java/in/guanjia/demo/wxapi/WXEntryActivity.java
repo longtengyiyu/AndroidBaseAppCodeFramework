@@ -34,7 +34,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mWxApi = WXAPIFactory.createWXAPI(this, AppContact.THIRD_LOGIN_WX_ID);
+        mWxApi = WXAPIFactory.createWXAPI(this, AppContact.WX_APP_ID);
         mWxApi.handleIntent(getIntent(), this);
     }
 
